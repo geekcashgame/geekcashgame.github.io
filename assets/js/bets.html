@@ -1,0 +1,319 @@
+
+<!-- saved from url=(0050)http://localhost/bets.html?round=1928a&level=small -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="./bets_files/jquery-3.3.1.min.js"></script>
+    <script src="./bets_files/vue2.5.17.js"></script>
+    <link rel="stylesheet" type="text/css" href="./bets_files/bets.css">
+    <link rel="stylesheet" type="text/css" href="./bets_files/common.css">
+    <script src="./bets_files/util.js"></script>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+<style>#cVim-command-bar, #cVim-command-bar-mode, #cVim-command-bar-input, #cVim-command-bar-search-results,
+.cVim-completion-item, .cVim-completion-item .cVim-full, .cVim-completion-item .cVim-left,
+.cVim-completion-item .cVim-right {
+  font-family: Helvetica, Helvetica Neue, Neue, sans-serif, monospace, Arial;
+  font-size: 10pt !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#cVim-command-bar {
+  position: fixed;
+  z-index: 2147483646;
+  background-color: #1b1d1e;
+  color: #bbb;
+  display: none;
+  box-sizing: content-box;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.4);
+  left: 0;
+  width: 100%;
+  height: 20px;
+}
+
+#cVim-command-bar-mode {
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  padding-left: 2px;
+  height: 100%;
+  width: 10px;
+  padding-top: 2px;
+  color: #888;
+}
+
+#cVim-command-bar-input {
+  background-color: #1b1d1e;
+  color: #bbb;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: calc(100% - 10px);
+  position: absolute;
+}
+
+#cVim-command-bar-search-results {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2147483647;
+  left: 0;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.4);
+  background-color: #1c1c1c;
+}
+
+.cVim-completion-item, .cVim-completion-item .cVim-full, .cVim-completion-item .cVim-left, .cVim-completion-item .cVim-right {
+  text-overflow: ellipsis;
+  padding: 1px;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cVim-completion-item:nth-child(even) {
+  background-color: #1f1f1f;
+}
+
+.cVim-completion-item {
+  width: 100%; left: 0;
+  color: #bcbcbc;
+}
+
+.cVim-completion-item[active] {
+  width: 100%; left: 0;
+  color: #1b1d1e;
+  background-color: #f1f1f1;
+}
+
+.cVim-completion-item[active] span {
+  color: #1b1d1e;
+}
+
+.cVim-completion-item .cVim-left {
+  color: #fff;
+  width: 37%;
+}
+
+.cVim-completion-item .cVim-right {
+  font-style: italic;
+  color: #888;
+  width: 57%;
+}
+
+
+#cVim-link-container, .cVim-link-hint,
+#cVim-hud, #cVim-status-bar {
+  font-family: Helvetica, Helvetica Neue, Neue, sans-serif, monospace, Arial;
+  font-size: 10pt !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#cVim-link-container {
+  position: absolute;
+  pointer-events: none;
+  width: 100%; left: 0;
+  height: 100%; top: 0;
+  z-index: 2147483647;
+}
+
+.cVim-link-hint {
+  position: absolute;
+  color: #302505 !important;
+  background-color: #ffd76e !important;
+  border-radius: 2px !important;
+  padding: 2px !important;
+  font-size: 8pt !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  border: 1px solid #ad810c;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.25) !important;
+}
+
+.cVim-link-hint_match {
+  color: #777;
+  text-transform: uppercase !important;
+}
+
+
+#cVim-hud {
+  background-color: rgba(28,28,28,0.9);
+  position: fixed !important;
+  transition: right 0.2s ease-out;
+  z-index: 24724289;
+}
+
+#cVim-hud span {
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #8f8f8f;
+  font-size: 10pt;
+}
+
+#cVim-frames-outline {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 9999999999;
+  box-sizing: border-box;
+  border: 3px solid yellow;
+}
+</style></head>
+
+<body>
+    <div id="games"><header><div class="header-title"><a href="http://localhost/index">GeekCash Games</a></div> <div class="header-menu"><span class="header-menu-item"><a href="http://localhost/index">Home</a></span> <span class="header-menu-item"><a href="http://localhost/rules">Rules</a></span> <span class="header-menu-item"><a href="https://aiodex.com/exchange/GEEK_BTC">Buy GeekCash</a></span> <span class="header-menu-item"><a href="http://localhost/history">Historical Bet</a></span> <span class="header-menu-item"><a>English</a> |
+                    <a> 中文</a></span></div></header> <div class="content-box"><div class="bets-info"><div>Round: </div> <div>Bet Count: </div> <div>Total Amount: </div> <div>Winners: </div> <div>Losers: </div> <div>Total Reward: </div> <div>Reward Number: </div></div> <div class="bets-box"><div class="bet-list-item normal-background"><div>Txid</div> <div>Bet Number</div> <div>Bet Amount</div> <div>Profit</div> <div>Bet Time</div> <div>Player Address</div></div> </div></div></div>
+
+
+
+
+<script>
+
+    var games = new Vue({
+      el: '#games',
+      data: {
+          bets_data :{},
+          lang_en : {
+              "mHome":"Home",
+              "mRules":"Rules",
+              "mBuy":"Buy GeekCash",
+              "mHistory":"Historical Bet",
+              "mSmall":"Small",
+              "mBig":"Big",
+              "mRare":"Rare",
+              "mRound":"Round",
+              "mBetCount":"Bet Count",
+              "mTotalAmount":"Total Amount",
+              "mWinners":"Winners",
+              "mLosers":"Losers",
+              "mTotalReward":"Total Reward",
+              "mRewardNumber":"Reward Number",
+              "mBetNumber":"Bet Number",
+              "mBetAmount":"Bet Amount",
+              "mProfit":"Profit",
+              "mBetTime":"Bet Time",
+              "mPlayerAddress":"Player Address",
+          },
+          lang_ch :{
+              "mHome":"主页",
+              "mRules":"规则及公平性",
+              "mBuy":"购买 GeekCash",
+              "mHistory":"历史下注",
+              "mSmall":"小赌注",
+              "mBig":"中赌注",
+              "mRare":"大赌注",
+              "mRound":"第几轮游戏",
+              "mBetCount":"下注总数量",
+              "mTotalAmount":"下注总金额",
+              "mWinners":"赢家数量",
+              "mLosers":"输家数量",
+              "mTotalReward":"总奖金",
+              "mRewardNumber":"开奖数字",
+              "mBetNumber":"下注数字",
+              "mBetAmount":"下注金额",
+              "mProfit":"收益",
+              "mBetTime":"下注时间",
+              "mPlayerAddress":"玩家地址",
+          },
+
+          curr_lang : this.lang_en,
+          selected_small_bet : true,
+          selected_big_bet : false,
+          selected_rare_bet : false,
+      },
+      // 在 `methods` 对象中定义方法
+      methods: {
+            setEnglishInterface: function(){
+                this.curr_lang = this.lang_en;
+            },
+            setChineseInterface: function(){
+                this.curr_lang = this.lang_ch;
+            },
+            refreshData: function(data){
+                this.bets_data = data;
+            },
+            setChinese: function(event){
+                setChineseLangCookie();
+                this.setChineseInterface();
+
+            },
+            setEnglish: function(event){
+
+                setEnglishLangCookie();
+                this.setEnglishInterface()
+            },
+
+      }
+    })
+
+
+        var curr_round = -1;
+        var curr_level = "";
+
+        function refreshHistoryData(){
+
+            if(curr_level != "small" && curr_level != "big" && curr_level != "rare"){
+                return;
+            }
+
+            if(curr_round > 0){
+                json_file = "./" + curr_level + "/" + curr_round + ".json";
+            }
+            else{
+               return;
+            }
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: json_file,
+                cache: false,
+                success: function(data){
+                    games.refreshData(data);
+                },
+                error: function(){
+                    //alert("error")
+                }
+            });
+        }
+
+
+
+        $(function(){
+
+            if(isChinese()){
+                games.setChineseInterface();
+            }
+            else{
+                games.setEnglishInterface();
+            }
+
+
+            let url_round = getUrlVars()["round"]
+            let url_level = getUrlVars()["level"]
+            curr_round = url_round;
+            curr_level = url_level;
+            refreshHistoryData();
+
+        });
+
+
+
+</script>
+
+
+
+
+
+<audio controls="controls" style="display: none;"></audio></body><div id="cVim-status-bar" style="top: 0px;"></div><iframe src="./bets_files/cmdline_frame.html" id="cVim-command-frame"></iframe><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>

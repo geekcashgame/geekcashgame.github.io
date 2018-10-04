@@ -1,0 +1,84 @@
+
+.level-select-box{
+    width:1024px;
+    margin:0 auto;
+    border:1px solid #262A41;
+    /*background:#181B2A;*/
+    margin-top:10px;
+}
+
+.level-select-item{
+    display:inline-block;
+    font-size:20px;
+    margin-right:50px;
+    text-decoration: underline;
+}
+
+level-select-box a{
+    color: #C7CCE5;
+    font-weight: bold;
+}
+
+.level-select-box a:visited{
+    color: #C7CCE5;
+    font-weight: bold;
+}
+
+.level-select-box a:hover{
+    color:greenyellow;
+    cursor:pointer;
+}
+
+
+.selected-level{
+    color:greenyellow;
+}
+
+
+.loser-profit{
+    color:red;
+}
+
+.winner-profit{
+    color:greenyellow;;
+}
+
+
+.bets-box{
+    width:1024px;
+    margin:0 auto;
+    border:1px solid #262A41;
+
+    margin-top:30px;
+}
+
+
+.bet-list-item div{
+    width:70px;
+    display:inline-block;
+    text-align:center;
+    width:100px;
+}
+
+
+.normal-background{
+    background:#181B2A;
+    margin-bottom:10px;
+}
+
+.bet-list-item div:nth-child(1){
+    width:120px;
+}
+
+.bet-list-item div:nth-child(5){
+    width:200px;
+}
+
+.bet-list-item div:nth-child(6){
+    width:360px;
+}
+
+
+.bets-info{
+    font-size:20px;
+}

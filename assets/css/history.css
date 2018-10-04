@@ -1,0 +1,89 @@
+
+.level-select-box{
+    width:1024px;
+    margin:0 auto;
+    border:1px solid #262A41;
+    /*background:#181B2A;*/
+    margin-top:10px;
+}
+
+.level-select-item{
+    display:inline-block;
+    font-size:20px;
+    margin-right:50px;
+    text-decoration: underline;
+}
+
+level-select-box a{
+    color: #C7CCE5;
+    font-weight: bold;
+}
+
+.level-select-box a:visited{
+    color: #C7CCE5;
+    font-weight: bold;
+}
+
+.level-select-box a:hover{
+    color:greenyellow;
+    cursor:pointer;
+}
+
+
+.selected-level{
+    color:greenyellow;
+}
+
+
+
+.bets-box{
+    width:1024px;
+    margin:0 auto;
+    border:1px solid #262A41;
+
+    margin-top:30px;
+    text-align:center;
+
+    background:#181B2A;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.normal-background{
+
+    margin-bottom:10px;
+}
+
+.bet-list-item div{
+    width:70px;
+    display:inline-block;
+    border:1px solid #262A41;
+}
+
+.add-border-content div{
+
+}
+
+.bet-list-item div:nth-child(5){
+    width:100px;
+}
+
+.bet-list-item div:nth-child(8){
+    width:100px;
+}
+
+.bet-list-item div:nth-child(12){
+    width:110px;
+}
+
+.bet-list-item div:nth-child(1){
+    text-decoration: underline;
+}
+
+.bet-list-item a{
+    color: #C7CCE5;
+}
+
+.bet-list-item a:hover{
+    color:greenyellow;
+}

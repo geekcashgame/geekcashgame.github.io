@@ -1,0 +1,256 @@
+﻿<html>
+<head>
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/vue2.5.17.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/bets.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/css/common.css"/>
+    <script src="../assets/js/util.js"></script>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="games" v-cloak>
+
+        <header>
+            <div class="header-title">
+                <a href="./index">GeekCash Games</a>
+            </div>
+
+            <div class="header-menu">
+                <span class="header-menu-item"><a href="./index">{{ curr_lang.mHome }}</a></span>
+                <span class="header-menu-item"><a href="rules">{{ curr_lang.mRules }}</a></span>
+                <span class="header-menu-item"><a href="https://aiodex.com/exchange/GEEK_BTC">{{ curr_lang.mBuy }}</a></span>
+                <span class="header-menu-item"><a href="./history">{{ curr_lang.mHistory }}</a></span>
+                <span class="header-menu-item">
+                    <a v-on:click="setEnglish">English</a> |
+                    <a v-on:click="setChinese"> 中文</a>
+                </span>
+            </div>
+        </header>
+
+        <div class="content-box">
+            <div class="bets-info">
+                <div>{{ curr_lang.mRound }}: {{ bets_data.round }}</div>
+                <div>{{ curr_lang.mBetCount }}: {{ bets_data.bet_count }}</div>
+                <div>{{ curr_lang.mTotalAmount }}: {{ bets_data.bet_amount }}</div>
+                <div>{{ curr_lang.mWinners }}: {{ bets_data.winner_count }}</div>
+                <div>{{ curr_lang.mLosers }}: {{ bets_data.loser_count }}</div>
+                <div>{{ curr_lang.mTotalReward }}: {{ bets_data.reward }}</div>
+                <div>{{ curr_lang.mRewardNumber}}: {{ bets_data.number }}</div>
+            </div>
+
+            <div class="bets-box">
+                <div class="bet-list-item">
+                    <div>Txid</div>
+                    <div>{{ curr_lang.mBetNumber }}</div>
+                    <div>{{ curr_lang.mBetAmount }}</div>
+                    <div>{{ curr_lang.mProfit }}</div>
+                    <div>{{ curr_lang.mBetTime }}</div>
+                    <div>{{ curr_lang.mPlayerAddress }}</div>
+                    <div>{{ curr_lang.mRewardTxid }}</div>
+                </div>
+
+                <div class="bet-list-item" v-for="item in bets_data.bet_list">
+                    <a :href="'https://explorer.geekcash.org/tx/' + item.txid"><div>{{ item.short_txid }}</div></a>
+                    <div>{{ item.bet_number }}</div>
+                    <div>{{ item.bet_amount }}</div>
+                    <div v-if="item.bet_reward < 0" class="loser-profit">{{ item.bet_reward }}</div>
+                    <div v-if="item.bet_reward >= 0" class="winner-profit">{{ item.bet_reward }}</div>
+                    <div>{{ item.join_time | formatDate  }}</div>
+                    <div>{{ item.player_address }}</div>
+                    <div v-if="item.short_payment_txid == '-'"> - </div>
+                    <a :href="'https://explorer.geekcash.org/tx/' + item.payment_txid"><div v-if="item.short_payment_txid != '-'">{{ item.short_payment_txid }}</div></a>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+
+    var games = new Vue({
+      el: '#games',
+      data: {
+          bets_data :{},
+          lang_en : {
+              "mHome":"Home",
+              "mRules":"Rules",
+              "mBuy":"Buy GeekCash",
+              "mHistory":"Historical Bet",
+              "mSmall":"Small",
+              "mBig":"Big",
+              "mRare":"Rare",
+              "mRound":"Round",
+              "mBetCount":"Bet Count",
+              "mTotalAmount":"Total Amount",
+              "mWinners":"Winners",
+              "mLosers":"Losers",
+              "mTotalReward":"Total Reward",
+              "mRewardNumber":"Reward Number",
+              "mBetNumber":"Bet Number",
+              "mBetAmount":"Bet Amount",
+              "mProfit":"Profit",
+              "mBetTime":"Bet Time",
+              "mPlayerAddress":"Player Address",
+              "mRewardTxid":"Reward Txid",
+          },
+          lang_ch :{
+              "mHome":"主页",
+              "mRules":"规则及公平性",
+              "mBuy":"购买 GeekCash",
+              "mHistory":"历史下注",
+              "mSmall":"小赌注",
+              "mBig":"中赌注",
+              "mRare":"大赌注",
+              "mRound":"第几轮游戏",
+              "mBetCount":"下注总数量",
+              "mTotalAmount":"下注总金额",
+              "mWinners":"赢家数量",
+              "mLosers":"输家数量",
+              "mTotalReward":"总奖金",
+              "mRewardNumber":"开奖数字",
+              "mBetNumber":"开奖数字",
+              "mBetAmount":"下注金额",
+              "mProfit":"收益",
+              "mBetTime":"下注时间",
+              "mPlayerAddress":"玩家地址",
+              "mRewardTxid":"奖金Txid",
+          },
+
+          curr_lang : this.lang_en,
+          selected_small_bet : true,
+          selected_big_bet : false,
+          selected_rare_bet : false,
+      },
+      // 在 `methods` 对象中定义方法
+      methods: {
+            setEnglishInterface: function(){
+                this.curr_lang = this.lang_en;
+            },
+            setChineseInterface: function(){
+                this.curr_lang = this.lang_ch;
+            },
+            refreshData: function(data){
+                this.bets_data = data;
+            },
+            setChinese: function(event){
+                setChineseLangCookie();
+                this.setChineseInterface();
+
+            },
+            setEnglish: function(event){
+
+                setEnglishLangCookie();
+                this.setEnglishInterface()
+            },
+      },
+        filters:
+            {
+                formatDate: function (timestamp) {
+
+                    var Y,M,D,h,m,s
+                    var timestamp= parseInt(timestamp)
+                    var date = null
+                    if (timestamp.toString().length == 10) {
+
+                        date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                    } else if (timestamp.toString().length == 13) {
+                        date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                    }
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    D = padLeftZero(date.getDate() + "") + ' ';
+                    h = padLeftZero(date.getHours() + "") + ':';
+                    m = padLeftZero(date.getMinutes() + "") + ':';
+                    s = padLeftZero(date.getSeconds() + "");
+                    return Y + M + D + h + m + s; //这里自定义返回 需要后面的加上就好了
+
+                }
+            }
+    })
+
+
+        var curr_round = -1;
+        var curr_level = "";
+
+        function refreshHistoryData(){
+
+            //if(curr_level != "small" && curr_level != "big" && curr_level != "rare"){
+            //    return;
+            //}
+
+            if(curr_level != "1" && curr_level != "2" && curr_level != "3"){
+                return;
+            }
+
+            if(curr_level == "1"){
+                level_name = "small"
+            }
+
+            if(curr_level == "2"){
+                level_name = "big"
+            }
+
+            if(curr_level == "3"){
+                level_name = "rare"
+            }
+
+            if(curr_round > 0){
+                json_file = "./" + level_name + "/" + curr_round + ".json";
+            }
+            else{
+               return;
+            }
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: json_file,
+                cache: false,
+                success: function(data){
+                    games.refreshData(data);
+                },
+                error: function(){
+                    //alert("error")
+                }
+            });
+        }
+
+        $(function(){
+
+            if(isChinese()){
+                games.setChineseInterface();
+            }
+            else{
+                games.setEnglishInterface();
+            }
+
+
+            let url_round = getUrlVars()["round"]
+            let url_level = getUrlVars()["level"]
+            curr_round = url_round;
+            curr_level = url_level;
+            refreshHistoryData();
+
+        });
+
+
+
+</script>
+
+
+
+
+
+</html>

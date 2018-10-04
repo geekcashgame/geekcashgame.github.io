@@ -1,0 +1,245 @@
+﻿<html>
+<head>
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/vue2.5.17.js"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/history.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/css/common.css"/>
+    <script src="../assets/js/util.js"></script>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="games" v-cloak>
+
+        <header>
+            <div class="header-title">
+                <a href="./index">GeekCash Games</a>
+            </div>
+
+            <div class="header-menu">
+                <span class="header-menu-item"><a href="./index">{{ curr_lang.mHome }}</a></span>
+                <span class="header-menu-item"><a href="rules">{{ curr_lang.mRules }}</a></span>
+                <span class="header-menu-item"><a href="https://aiodex.com/exchange/GEEK_BTC">{{ curr_lang.mBuy }}</a></span>
+                <span class="header-menu-item"><a href="./history">{{ curr_lang.mHistory }}</a></span>
+                <span class="header-menu-item">
+                    <a v-on:click="setEnglish">English</a> |
+                    <a v-on:click="setChinese"> 中文</a>
+                </span>
+            </div>
+        </header>
+
+        <div class="content-box">
+            <div class="level-select-box">
+                <a href="./history.html?level=small"><div class="level-select-item" v-bind:class="{ 'selected-level' : selected_small_bet}">{{ curr_lang.mSmall }}</div></a>
+                <a href="./history.html?level=big"><div class="level-select-item" v-bind:class="{ 'selected-level' : selected_big_bet}">{{ curr_lang.mBig }}</div></a>
+                <a href="./history.html?level=rare"><div class="level-select-item" v-bind:class="{ 'selected-level' : selected_rare_bet}">{{ curr_lang.mRare }}</div></a>
+            </div>
+
+            <div class="bets-box">
+                <div class="bet-list-item normal-background">
+                    <div>{{ curr_lang.mRound }}</div>
+                    <div>{{ curr_lang.mNumber }}</div>
+                    <div>{{ curr_lang.mLevel }}</div>
+                    <div>{{ curr_lang.mBetCount }}</div>
+                    <div>{{ curr_lang.mAmount }}</div>
+                    <div>{{ curr_lang.mWinnerCount }}</div>
+                    <div>{{ curr_lang.mLoserCount}}</div>
+                    <div>{{ curr_lang.mRewards }}</div>
+                    <div>{{ curr_lang.mStartBlock }}</div>
+                    <div>{{ curr_lang.mEndBlock }}</div>
+                    <div>{{ curr_lang.mSettlementBlock }}</div>
+                    <div>nonce</div>
+                </div>
+
+                <div class="bet-list-item add-border-content" v-for="item in history_bet_list">
+                    <a :href="'./bets?level=' + item.level + '&round=' + item.round"><div>{{ item.round }}</div></a>
+                    <div>{{ item.number }}</div>
+                    <div v-if="item.level == 1">{{ curr_lang.mSmall }}</div>
+                    <div v-if="item.level == 2">{{ curr_lang.mBig }}</div>
+                    <div v-if="item.level == 3">{{ curr_lang.mRare }}</div>
+                    <div>{{ item.bet_count }}</div>
+                    <div>{{ item.bet_amount }}</div>
+                    <div>{{ item.winner_count }}</div>
+                    <div>{{ item.loser_count }}</div>
+                    <div>{{ item.reward }}</div>
+                    <div>{{ item.start_bet_block }}</div>
+                    <div>{{ item.end_bet_block }}</div>
+                    <div>{{ item.reward_block }}</div>
+                    <div>{{ item.nonce }}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+
+    var games = new Vue({
+      el: '#games',
+      data: {
+          history_bet_list : [],
+          lang_en : {
+              "mHome":"Home",
+              "mRules":"Rules",
+              "mBuy":"Buy GeekCash",
+              "mHistory":"Historical Bet",
+              "mSmall":"Small",
+              "mBig":"Big",
+              "mRare":"Rare",
+              "mRound":"Round",
+              "mNumber":"Reward Number",
+              "mLevel":"Level",
+              "mBetCount":"Bet Count",
+              "mAmount":"Total Amount",
+              "mWinnerCount":"Winners",
+              "mLoserCount":"Losers",
+              "mRewards":"Total Reward",
+              "mStartBlock":"Start Block",
+              "mEndBlock":"End Block",
+              "mSettlementBlock":"Settlement Block",
+          },
+          lang_ch :{
+              "mHome":"主页",
+              "mRules":"规则及公平性",
+              "mBuy":"购买 GeekCash",
+              "mHistory":"历史下注",
+              "mSmall":"小赌注",
+              "mBig":"中赌注",
+              "mRare":"大赌注",
+              "mRound":"第几轮",
+              "mNumber":"开奖数字",
+              "mLevel":"下注等级",
+              "mBetCount":"下注数量",
+              "mAmount":"下注总额",
+              "mWinnerCount":"赢家数量",
+              "mLoserCount":"输家数量",
+              "mRewards":"总奖金",
+              "mStartBlock":"开始区块",
+              "mEndBlock":"结束区块",
+              "mSettlementBlock":"开奖区块",
+
+          },
+
+          curr_lang : this.lang_en,
+          selected_small_bet : true,
+          selected_big_bet : false,
+          selected_rare_bet : false,
+
+      },
+      // 在 `methods` 对象中定义方法
+      methods: {
+            setEnglishInterface: function(){
+                this.curr_lang = this.lang_en;
+            },
+            setChineseInterface: function(){
+                this.curr_lang = this.lang_ch;
+            },
+            refreshData: function(data){
+                this.history_bet_list = data;
+            },
+            showSmallHistory: function(){
+                this.selected_small_bet = true;
+                this.selected_big_bet = false;
+                this.selected_rare_bet = false;
+            },
+            showBigHistory: function(){
+                this.selected_small_bet = false;
+                this.selected_big_bet = true;
+                this.selected_rare_bet = false;
+            },
+            showRareHistory: function(){
+                this.selected_small_bet = false;
+                this.selected_big_bet = false;
+                this.selected_rare_bet = true;
+            },
+            setChinese: function(event){
+                setChineseLangCookie();
+                this.setChineseInterface();
+
+            },
+            setEnglish: function(event){
+
+                setEnglishLangCookie();
+                this.setEnglishInterface()
+            },
+
+      }
+    })
+
+
+        var bet_level = "small";
+
+        function refreshHistoryData(){
+            if(bet_level === "small"){
+                json_data = "./small_history.json";
+            }
+            else if(bet_level === "big"){
+                json_data = "./big_history.json";
+            }
+            else if(bet_level === "rare"){
+                json_data = "./rare_history.json";
+            }
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: json_data,
+                cache: false,
+                success: function(data){
+                    games.refreshData(data);
+                },
+                error: function(){
+                    //alert("error")
+                }
+            });
+        }
+
+
+
+        $(function(){
+
+            if(isChinese()){
+                games.setChineseInterface();
+            }
+            else{
+                games.setEnglishInterface();
+            }
+
+
+            let url_level = getUrlVars()["level"]
+
+            if (url_level == "big"){
+                bet_level = "big";
+                games.showBigHistory();
+            }
+            else if (url_level == "rare"){
+                bet_level = "rare";
+                games.showRareHistory()
+            }
+            else{
+                bet_level == "small";
+                games.showSmallHistory();
+            }
+
+            refreshHistoryData();
+            //setInterval(function(){ refreshHistoryData(); }, 5000);
+        });
+
+
+
+</script>
+
+
+
+
+
+</html>
