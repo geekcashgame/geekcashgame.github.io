@@ -41,7 +41,7 @@
                 <div>{{ curr_lang.mTotalAmount }}: {{ bets_data.bet_amount }}</div>
                 <div>{{ curr_lang.mWinners }}: {{ bets_data.winner_count }}</div>
                 <div>{{ curr_lang.mLosers }}: {{ bets_data.loser_count }}</div>
-                <div>{{ curr_lang.mTotalReward }}: {{ bets_data.reward }}</div>
+                <div>{{ curr_lang.mTotalReward }}: {{ bets_data.reward }} Geek</div>
                 <div>{{ curr_lang.mRewardNumber}}: {{ bets_data.number }}</div>
             </div>
 
@@ -67,10 +67,13 @@
                     <div v-if="item.short_payment_txid == '-'"> - </div>
                     <a :href="'https://explorer.geekcash.org/tx/' + item.payment_txid"><div v-if="item.short_payment_txid != '-'">{{ item.short_payment_txid }}</div></a>
                 </div>
-
-
-
             </div>
+
+            <div class="footer">
+                <div>Copyright 2018</div>
+                <div>Contact GeekCashGame: <a href=mailto:geekcashgame@outlook.com>geekcashgame@outlook.com</a></div>
+            </div>
+
         </div>
     </div>
 </body>
@@ -93,11 +96,11 @@
               "mRare":"Rare",
               "mRound":"Round",
               "mBetCount":"Bet Count",
-              "mTotalAmount":"Total Amount",
+              "mTotalAmount":"Total Bets Amount",
               "mWinners":"Winners",
               "mLosers":"Losers",
-              "mTotalReward":"Total Reward",
-              "mRewardNumber":"Reward Number",
+              "mTotalReward":"Total Bonus",
+              "mRewardNumber":"Win Number",
               "mBetNumber":"Bet Number",
               "mBetAmount":"Bet Amount",
               "mProfit":"Profit",

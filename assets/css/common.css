@@ -108,3 +108,24 @@ header{
 .module-title{
     font-size:16px;
 }
+
+
+.footer{
+    width:1024px;
+    margin:0 auto;
+    margin-top:50px;
+    border:1px solid #262A41;
+    text-align:center;
+}
+
+.footer a{
+    color: #C7CCE5;
+}
+
+.footer a:hover {
+    color: greenyellow;
+}
+
+.footer a:visited{
+    color: #C7CCE5;
+}

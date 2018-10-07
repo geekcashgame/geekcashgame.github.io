@@ -183,10 +183,12 @@
     font-size:18px;
     text-align: center;
     margin-top:10px;
+    color: #C7CCE5;
 }
 
 .curr-round-bet-button a{
     text-decoration: none;
+    color: #C7CCE5;
 }
 
 .curr-round-bet-button a:visited{
@@ -214,6 +216,21 @@
     margin-top:10px;
     margin-left:10px;
     font-size:14px;
+    width:250px;
+    float:left;
+}
+
+.roulette-box{
+    width:230px;
+    float:right;
+    margin-right:10px;
+
+}
+
+.roulette-box img{
+    width:100%;
+    margin-top:20px;
+
 }
 
 
